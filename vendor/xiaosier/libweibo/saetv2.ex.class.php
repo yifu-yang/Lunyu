@@ -4,7 +4,9 @@
  * 
  * @author Elmer Zhang <freeboy6716@gmail.com>
  */
+namespace App\Http\Controllers;
 
+use Exception;
 /**
  * If the class OAuthException has not been declared, extend the Exception class.
  * This is to allow OAuth without the PECL OAuth library

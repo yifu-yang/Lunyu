@@ -10,23 +10,28 @@ class AccountController extends controller
     public function __construct()
     {
         //init conreoller
-        $this->client = new SaeTOAuthV2( WB_AKEY , WB_SKEY );
+        $this->client = new SaeTOAuthV2( env('WB_AKEY') , env('WB_SKEY'));
+    }
+
+    public function index()
+    {
+        $code_url = $this->client->getAuthorizeURL( env('WB_CALLBACK_URL') );
+        return view('welcome',compact('code_url'));
     }
 
     public function callback()
     {
-        $code = Input::get('code');
-        $redirect_uri = WB_CALLBACK_URL;
+        // $code = Input::get('code');
+        // $redirect_uri = env('WB_CALLBACK_URL');
 
-        try {
-		    $token = $o->getAccessToken( 'code', $keys ) ;
-	    } catch (OAuthException $e) {
+		// $token = $o->getAccessToken( 'code', $keys ) ;
 
-	    }
 
-        if ($token) {
-	        $_SESSION['token'] = $token;
-	        setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
-        }
+        // if ($token) {
+	    //     session(['token'=>$token]);
+	    //     //setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
+        // }
+        $code_url = $this->client->getAuthorizeURL( env('WB_CALLBACK_URL') );
+        return view('welcome',compact('code_url'));
     }
 }

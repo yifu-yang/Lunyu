@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
-Route::get('/auth','AccountCountroller@callback' );
+Route::get('/', 'AccountController@index');
+//Route::get('/callback','AccountController@callback' );
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -31,4 +29,5 @@ Route::get('/auth','AccountCountroller@callback' );
 
 Route::group(['middleware' => ['web']], function () {
     //
+    Route::get('/callback','AccountController@callback' );
 });

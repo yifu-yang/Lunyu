@@ -39,6 +39,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
+                <a href='{{$code_url}}' > click me </a>
             </div>
         </div>
     </body>
