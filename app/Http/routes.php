@@ -15,7 +15,7 @@
 
 
 Route::get('/', 'AccountController@index');
-//Route::get('/callback','AccountController@callback' );
+Route::get('callback','AccountController@callback' );
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,7 +27,7 @@ Route::get('/', 'AccountController@index');
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-    Route::get('/callback','AccountController@callback' );
-});
+// Route::group(['middleware' => ['web']], function () {
+//     //
+//     Route::get('/callback','AccountController@callback' );
+// });
