@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 
+
 class AccountController extends controller
 {
     private $authClient;
@@ -14,7 +15,7 @@ class AccountController extends controller
     public function __construct()
     {
         //init conreoller
-        $this->authClient = new SaeTOAuthV2( env('WB_AKEY') , env('WB_SKEY'));
+        $this->authClient = new \SaeTOAuthV2( env('WB_AKEY') , env('WB_SKEY'));
     }
 
     public function index()
@@ -32,11 +33,11 @@ class AccountController extends controller
 	    $keys['code'] = $code;
 	    $keys['redirect_uri'] = $redirect_uri;
 		$token = $this->authClient->getAccessToken( 'code', $keys ) ;
-        //var_dump($token);
+        var_dump($token);
         if ($token) {
-	        session(['token'=>$token]);
-            $this->weiboClient = new SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
-            $this->weiboClient->update('这是一条测试微博');
+            session(['token'=>$token]);
+            $this->weiboClient = new \SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
+            var_dump($this->weiboClient->share('这是一条测试微博@Magic寻梦 http://shuoshuoshuoshuoshuoshuoshuoshuoshuoshuoshuoshuo.cn'));
 	        //setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
         }
         // $code_url = $this->client->getAuthorizeURL( env('WB_CALLBACK_URL') );
