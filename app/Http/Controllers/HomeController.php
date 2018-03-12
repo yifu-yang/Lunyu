@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
-
+use Illuminate\Http\Request;
 
 class HomeController extends controller
 {
@@ -19,9 +19,10 @@ class HomeController extends controller
     /*
      *  获取用户timeline首页 
      */
-    public function timeLine(Reauest $request){
-        $token = $request->session()->get("token");
+    public function timeLine(Request $request){
+        $token = $request->session()->get('token');
         $this->weiboClient= new \SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
+        var_dump($this->weiboClient->home_timeline());
         return $this->weiboClient->home_timeline();
     }
 

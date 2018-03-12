@@ -33,14 +33,14 @@ class AccountController extends controller
 	    $keys['code'] = $code;
 	    $keys['redirect_uri'] = $redirect_uri;
 		$token = $this->authClient->getAccessToken( 'code', $keys ) ;
-        var_dump($token);
+        //var_dump($token);
         if ($token) {
             session(['token'=>$token]);
             $this->weiboClient = new \SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
-            var_dump($this->weiboClient->share('这是一条测试微博@Magic寻梦 http://shuoshuoshuoshuoshuoshuoshuoshuoshuoshuoshuoshuo.cn'));
-	        //setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
+            //var_dump($this->weiboClient->share('这是一条测试微博@Magic寻梦 http://shuoshuoshuoshuoshuoshuoshuoshuoshuoshuoshuoshuo.cn'));
+	        //setcookie( 'lunyutoken', $token );
         }
         // $code_url = $this->client->getAuthorizeURL( env('WB_CALLBACK_URL') );
-        // return view('welcome',compact('code_url'));
+        return redirect()->action('HomeController@timeLine');
     }
 }
