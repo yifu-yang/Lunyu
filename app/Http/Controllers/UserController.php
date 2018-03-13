@@ -57,8 +57,6 @@ class UserController extends controller
      * 点赞列表
      */
     public function interestingPeople(){
-        $token = $request->session()->get("token");
-        $this->weiboClient= new \SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
-        return $this->weiboClient->suggestions_may_interested();
+        return null;
     }
 }
