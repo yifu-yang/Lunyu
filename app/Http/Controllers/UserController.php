@@ -46,7 +46,7 @@ class UserController extends controller
     }
 
     /*
-     * 发送一条微博
+     * 发送一条定向微博
      */
     public function sendLun(Request $request){
         $data = $request->json()->all();
