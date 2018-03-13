@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
-class HomeController extends controller
+class UserController extends controller
 {
     private $weiboClient;
 
@@ -17,13 +17,13 @@ class HomeController extends controller
     }
 
     /*
-     *  获取用户timeline首页 
+     *  获取当前用户timeline首页 
      */
     public function timeLine(Request $request){
         $token = $request->session()->get('token');
         $this->weiboClient= new \SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
-        var_dump($this->weiboClient->home_timeline());
-        return $this->weiboClient->home_timeline();
+        //var_dump($this->weiboClient->home_timeline());
+        return $this->weiboClient->user_timeline_by_id($token['uid']);
     }
 
     /*
@@ -36,12 +36,13 @@ class HomeController extends controller
     }
 
     /*
-     * 获取热门话题
+     * 获取用户关系
      */
-    public function topic(){
+    public function relatedPeople(Request $request){
+        $screenname = $request->query("screenname");
         $token = $request->session()->get("token");
         $this->weiboClient= new \SaeTClientV2( env('WB_AKEY') , env('WB_SKEY') , $token['access_token'] );
-        return $this->weiboClient->daily_trends();
+        return $this->weiboClient->friends_chain_followers($screenname);
     }
 
     /*
@@ -53,7 +54,7 @@ class HomeController extends controller
     }
 
     /*
-     * 感兴趣的用户列表
+     * 点赞列表
      */
     public function interestingPeople(){
         $token = $request->session()->get("token");
